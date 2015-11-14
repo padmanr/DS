@@ -146,7 +146,7 @@ namespace DS
             Console.WriteLine();
         }
 
-        public void DFT(T value)
+        public void DFS(T value)
         {
             Console.WriteLine("Depth first search");
             this.DFS((x) => { return x.Data.Equals(value); });
@@ -179,6 +179,50 @@ namespace DS
                 if (node.Left != null)
                 {
                     stack.Push(node.Left);
+                }
+            }
+        }
+
+        public void BFT()
+        {
+            Console.WriteLine("Breadth first traversal");
+            this.BFS((x) => { Console.Write(x.Data + "\t"); return false; });
+            Console.WriteLine();
+        }
+
+        public void BFS(T value)
+        {
+            Console.WriteLine("Breadth first search");
+            this.BFS((x) => { return x.Data.Equals(value); });
+            Console.WriteLine();
+        }
+
+        private void BFS(Func<BinaryNode<T>, bool> action)
+        {
+            if (this.root == null)
+            {
+                return;
+            }
+
+            Queue<BinaryNode<T>> queue = new Queue<BinaryNode<T>>();
+            queue.Enqueue(this.root);
+
+            while (queue.Count() > 0)
+            {
+                BinaryNode<T> node = queue.Dequeue();
+                if (action(node))
+                {
+                    return;
+                }
+
+                if (node.Left != null)
+                {
+                    queue.Enqueue(node.Left);
+                }
+
+                if (node.Right != null)
+                {
+                    queue.Enqueue(node.Right);
                 }
             }
         }

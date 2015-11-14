@@ -30,6 +30,7 @@ namespace DS
             tree.LevelOrder();
 
             tree.DFT();
+            tree.BFT();
         }
 
         static void List(string[] args)
