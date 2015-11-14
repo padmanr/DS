@@ -138,5 +138,49 @@ namespace DS
 
             Console.WriteLine();
         }
+
+        public void DFT()
+        {
+            Console.WriteLine("Depth first traversal");
+            this.DFS((x) => { Console.Write(x.Data + "\t"); return false; });
+            Console.WriteLine();
+        }
+
+        public void DFT(T value)
+        {
+            Console.WriteLine("Depth first search");
+            this.DFS((x) => { return x.Data.Equals(value); });
+            Console.WriteLine();
+        }
+
+        private void DFS(Func<BinaryNode<T>, bool> action)
+        {
+            if (this.root == null)
+            {
+                return;
+            }
+
+            Stack<BinaryNode<T>> stack = new Stack<BinaryNode<T>>();
+            stack.Push(this.root);
+
+            while (stack.Count() > 0)
+            {
+                BinaryNode<T> node = stack.Pop();
+                if (action(node))
+                {
+                    return;
+                }
+
+                if (node.Right != null)
+                {
+                    stack.Push(node.Right);
+                }
+
+                if (node.Left != null)
+                {
+                    stack.Push(node.Left);
+                }
+            }
+        }
     }
 }

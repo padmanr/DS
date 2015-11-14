@@ -28,6 +28,8 @@ namespace DS
             tree.PostOrder();
 
             tree.LevelOrder();
+
+            tree.DFT();
         }
 
         static void List(string[] args)
